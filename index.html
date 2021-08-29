@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+    <meta charset="utf-8"> <!-- utf-8 works for most cases -->
+    <meta name="viewport" content="width=device-width"> <!-- Forcing initial-scale shouldn't be necessary -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Use the latest (edge) version of IE rendering engine -->
+    <meta name="x-apple-disable-message-reformatting">  <!-- Disable auto-scale in iOS 10 Mail entirely -->
+    <meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no"> <!-- Tell iOS not to automatically link certain text strings. -->
+    <meta name="color-scheme" content="light">
+    <meta name="supported-color-schemes" content="light">
+    <title></title> <!-- The title tag shows in email notifications, like Android 4.4. -->
+
+    <!-- What it does: Makes background images in 72ppi Outlook render at correct size. -->
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:AllowPNG/>
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+    </xml>
+    <![endif]-->
+
+    <!-- Web Font / @font-face : BEGIN -->
+    <!-- NOTE: If web fonts are not required, lines 23 - 41 can be safely removed. -->
+
+    <!-- Desktop Outlook chokes on web font references and defaults to Times New Roman, so we force a safe fallback font. -->
+    <!--[if mso]>
+        <style>
+            * {
+                font-family: sans-serif !important;
+            }
+        </style>
+    <![endif]-->
+
+    <!-- All other clients get the webfont reference; some will render the font and others will silently fail to the fallbacks. More on that here: http://stylecampaign.com/blog/2015/02/webfont-support-in-email/ -->
+    <!--[if !mso]><!-->
+    <!-- insert web font reference, eg: <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'> -->
+    <!--<![endif]-->
+
+    <!-- Web Font / @font-face : END -->
+
+    <!-- CSS Reset : BEGIN -->
+    <style>
+
+        /* What it does: Tells the email client that only light styles are provided but the client can transform them to dark. A duplicate of meta color-scheme meta tag above. */
+        :root {
+          color-scheme: light;
+          supported-color-schemes: light;
+        }
+
+        /* What it does: Remove spaces around the email design added by some email clients. */
+        /* Beware: It can remove the padding / margin and add a background color to the compose a reply window. */
+        html,
+        body {
+            margin: 0 auto !important;
+            padding: 0 !important;
+            height: 100% !important;
+            width: 100% !important;
+        }
+
+        /* What it does: Stops email clients resizing small text. */
+        * {
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        /* What it does: Centers email on Android 4.4 */
+        div[style*="margin: 16px 0"] {
+            margin: 0 !important;
+        }
+        /* What it does: forces Samsung Android mail clients to use the entire viewport */
+        #MessageViewBody, #MessageWebViewDiv{
+            width: 100% !important;
+        }
+
+        /* What it does: Stops Outlook from adding extra spacing to tables. */
+        table,
+        td {
+            mso-table-lspace: 0pt !important;
+            mso-table-rspace: 0pt !important;
+        }
+
+        /* What it does: Fixes webkit padding issue. */
+        table {
+            border-spacing: 0 !important;
+            border-collapse: collapse !important;
+            table-layout: fixed !important;
+            margin: 0 auto !important;
+        }
+
+        /* What it does: Uses a better rendering method when resizing images in IE. */
+        img {
+            -ms-interpolation-mode:bicubic;
+        }
+
+        /* What it does: Prevents Windows 10 Mail from underlining links despite inline CSS. Styles for underlined links should be inline. */
+        a {
+            text-decoration: none;
+        }
+
+        /* What it does: A work-around for email clients meddling in triggered links. */
+        a[x-apple-data-detectors],  /* iOS */
+        .unstyle-auto-detected-links a,
+        .aBn {
+            border-bottom: 0 !important;
+            cursor: default !important;
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+        }
+
+        /* What it does: Prevents Gmail from changing the text color in conversation threads. */
+        .im {
+            color: inherit !important;
+        }
+
+        /* What it does: Prevents Gmail from displaying a download button on large, non-linked images. */
+        .a6S {
+            display: none !important;
+            opacity: 0.01 !important;
+        }
+        /* If the above doesn't work, add a .g-img class to any image in question. */
+        img.g-img + div {
+            display: none !important;
+        }
+
+        /* What it does: Removes right gutter in Gmail iOS app: https://github.com/TedGoas/Cerberus/issues/89  */
+        /* Create one of these media queries for each additional viewport size you'd like to fix */
+
+        /* iPhone 4, 4S, 5, 5S, 5C, and 5SE */
+        @media only screen and (min-device-width: 320px) and (max-device-width: 374px) {
+            u ~ div .email-container {
+                min-width: 320px !important;
+            }
+        }
+        /* iPhone 6, 6S, 7, 8, and X */
+        @media only screen and (min-device-width: 375px) and (max-device-width: 413px) {
+            u ~ div .email-container {
+                min-width: 375px !important;
+            }
+        }
+        /* iPhone 6+, 7+, and 8+ */
+        @media only screen and (min-device-width: 414px) {
+            u ~ div .email-container {
+                min-width: 414px !important;
+            }
+        }
+
+    </style>
+    <!-- CSS Reset : END -->
+
+    <!-- Progressive Enhancements : BEGIN -->
+    <style>
+
+	    /* What it does: Hover styles for buttons */
+	    .button-td,
+	    .button-a {
+	        transition: all 100ms ease-in;
+	    }
+	    .button-td-primary:hover,
+	    .button-a-primary:hover {
+	        background: #555555 !important;
+	        border-color: #555555 !important;
+	    }
+
+	    /* Media Queries */
+	    @media screen and (max-width: 480px) {
+
+	        /* What it does: Forces table cells into full-width rows. */
+	        .stack-column,
+	        .stack-column-center {
+	            display: block !important;
+	            width: 100% !important;
+	            max-width: 100% !important;
+	            direction: ltr !important;
+	        }
+	        /* And center justify these ones. */
+	        .stack-column-center {
+	            text-align: center !important;
+	        }
+
+	        /* What it does: Generic utility class for centering. Useful for images, buttons, and nested tables. */
+	        .center-on-narrow {
+	            text-align: center !important;
+	            display: block !important;
+	            margin-left: auto !important;
+	            margin-right: auto !important;
+	            float: none !important;
+	        }
+	        table.center-on-narrow {
+	            display: inline-block !important;
+	        }
+
+	        /* What it does: Adjust typography on small screens to improve readability */
+	        .email-container p {
+	            font-size: 17px !important;
+	        }
+	    }
+
+    </style>
+    <!-- Progressive Enhancements : END -->
+
+</head>
+<!--
+	The email background color (#222222) is defined in three places:
+	1. body tag: for most email clients
+	2. center tag: for Gmail and Inbox mobile apps and web versions of Gmail, GSuite, Inbox, Yahoo, AOL, Libero, Comcast, freenet, Mail.ru, Orange.fr
+	3. mso conditional: For Windows 10 Mail
+-->
+<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #222222;">
+  <center role="article" aria-roledescription="email" lang="en" style="width: 100%; background-color: #222222;">
+    <!--[if mso | IE]>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #222222;">
+    <tr>
+    <td>
+    <![endif]-->
+
+        <!-- Visually Hidden Preheader Text : BEGIN -->
+        <div style="max-height:0; overflow:hidden; mso-hide:all;" aria-hidden="true">
+            (Optional) This text will appear in the inbox preview, but not the email body. It can be used to supplement the email subject line or even summarize the email's contents. Extended text preheaders (~490 characters) seems like a better UX for anyone using a screenreader or voice-command apps like Siri to dictate the contents of an email. If this text is not included, email clients will automatically populate it using the text (including image alt text) at the start of the email's body.
+        </div>
+        <!-- Visually Hidden Preheader Text : END -->
+
+        <!-- Create white space after the desired preview text so email clients don’t pull other distracting text into the inbox preview. Extend as necessary. -->
+        <!-- Preview Text Spacing Hack : BEGIN -->
+        <div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
+	        &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
+        </div>
+        <!-- Preview Text Spacing Hack : END -->
+
+        <!--
+            Set the email width. Defined in two places:
+            1. max-width for all clients except Desktop Windows Outlook, allowing the email to squish on narrow but never go wider than 680px.
+            2. MSO tags for Desktop Windows Outlook enforce a 680px width.
+            Note: The Fluid and Responsive templates have a different width (600px). The hybrid grid is more "fragile", and I've found that 680px is a good width. Change with caution.
+        -->
+        <div style="width: 100%; max-width: 600px; margin: 0 auto;" class="email-container">
+            <!--[if mso]>
+            <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="600">
+            <tr>
+            <td>
+            <![endif]-->
+
+	        <!-- Email Body : BEGIN -->
+	        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
+		        <!-- Email Header : BEGIN -->
+		        <tr>
+		            <td style="padding: 0;" width="600">
+		                <img src="https://image.mail.disneyplus.com/lib/fe4415707564067f751773/m/1/ebdd104f-b7cb-4276-9afd-3dd3fbe258ec.jpg" alt="Disney + Logo" width="100%" border="0" style="display: block;width: 100%;" />
+		            </td>
+		        </tr>
+		        <!-- Email Header : END -->
+
+	            <!-- Hero Image, Flush : BEGIN -->
+                <tr>
+                    <td style="padding: 0;" width="600">
+                        <img src="https://image.mail.disneyplus.com/lib/fe4415707564067f751773/m/1/f0cc76e1-889e-4742-ba78-261fe150e334.jpg" alt="Hero image" style="display: block;width: 100%;" width="100%" border="0" />
+                    </td>
+                </tr>
+                <!-- Hero Image, Flush : END -->
+
+                <!-- 1 Column Text + Button : BEGIN -->
+                <tr>
+                    <td align="center" bgcolor="#F0F3F9" style="padding: 40px 20px;background: #F0F3F9;">
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td width="400" align="center" style="color: #0A173F;font-family: 'Arial';text-align: center;width: 100%;max-width: 400px">
+                                    <h1 style="font-family: 'Arial';margin: 0;">Welcome to Disney +</h1>
+                                    <p style="color:#9394A3;font-family: 'Arial';margin: 0;padding-top: 15px;line-height: 22px;">Disney, Pixar, Marvel, Star Wars, and National Geographic are all at your finger tips.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" style="padding: 30px 0 0 0;text-align: center;">
+                                    <div>
+                                         <!--[if mso]>
+                                          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://www.disneyplus.com/" style="height:40px;v-text-anchor:middle;width:200px;" arcsize="20%" strokecolor="#026AF7" fillcolor="#026AF7">
+                                            <w:anchorlock/>
+                                            <center style="color:#ffffff;font-family:sans-serif;font-size:16px;font-weight:bold;">Stream now</center>
+                                          </v:roundrect>
+                                        <![endif]-->
+                                        <a href="https://www.disneyplus.com/" style="background-color:#026AF7;border:1px solid #026AF7;border-radius:8px;color:#ffffff;display:inline-block;font-family:sans-serif;font-size:16px;font-weight:bold;line-height:45px;text-align:center;text-decoration:none;width:245px;-webkit-text-size-adjust:none;mso-hide:all;">Stream now</a>
+                                   </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- 1 Column Text + Button : END -->
+                
+                <!-- Horizontal Line Rule Start -->
+                <tr>
+                    <td bgcolor="#F0F3F9" style="padding: 0 30px;background: #F0F3F9">
+                        <hr style="height: 1px;border: none;background-color: #9394A3;" />
+                    </td>
+                </tr>
+                <!-- Horizontal Line Rule End -->
+
+                <!-- 3 Images BEGIN -->
+                <tr>
+                    <td align="center" bgcolor="#F0F3F9" style="padding: 40px 30px 0 30px">
+                        <table align="center" cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td align="center" bgcolor="#F0F3F9" style="padding: 0;">
+                                    <img src="https://image.mail.disneyplus.com/lib/fe4415707564067f751773/m/1/5bc1db8b-44b9-4115-92c9-aa6f9e45b36e.jpg" alt="The Simpson" width="128" border="0" style="display: block;width: 100%;max-width: 128px" />
+                                </td>
+                                <td style="padding: 0;">
+                                    <img src="https://image.mail.disneyplus.com/lib/fe4415707564067f751773/m/1/50b6aed0-e0d0-42ec-b6d9-0b67b86ca899.gif" alt="Spacer gif" style="display: block;" width="9" height="9" />
+                                </td>
+                                <td align="center" bgcolor="#F0F3F9" style="padding: 0;">
+                                    <img src="https://image.mail.disneyplus.com/lib/fe4415707564067f751773/m/1/87af0573-8bdb-4f4f-a75e-9dbc4c657dd6.jpg" alt="The Simpson" width="128" border="0" style="display: block;width: 100%;max-width: 128px" />
+                                </td>
+                                <td style="padding: 0;">
+                                    <img src="https://image.mail.disneyplus.com/lib/fe4415707564067f751773/m/1/50b6aed0-e0d0-42ec-b6d9-0b67b86ca899.gif" alt="Spacer gif" style="display: block;" width="9" height="9" />
+                                </td>
+                                <td align="center" bgcolor="#F0F3F9" style="padding: 0;">
+                                    <img src="https://image.mail.disneyplus.com/lib/fe4415707564067f751773/m/1/b1255e01-7ab1-468b-a690-b8cea04435a9.jpg" alt="The Simpson" width="128" border="0" style="display: block;width: 100%;max-width: 128px" />
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- 3 Images and texr END -->
+
+                <!-- 2 Images BEGIN -->
+                <tr>
+                    <td align="center" bgcolor="#F0F3F9" style="padding-top: 9px;padding-bottom: 40px;">
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td align="center" bgcolor="#F0F3F9" style="padding: 0;">
+                                    <img src="https://image.mail.disneyplus.com/lib/fe4415707564067f751773/m/1/572457c4-4037-4a67-9c93-c4c6204639f8.jpg" alt="Captain Marvel" style="display: block;width: 100%;max-width: 128px;" width="128" border="0" />
+                                </td>
+                                <td style="padding: 0;">
+                                    <img src="https://image.mail.disneyplus.com/lib/fe4415707564067f751773/m/1/50b6aed0-e0d0-42ec-b6d9-0b67b86ca899.gif" alt="Spacer gif" style="display: block;" width="9" height="9" />
+                                </td>
+                                <td align="center" bgcolor="#F0F3F9" style="padding: 0;">
+                                    <img src="https://image.mail.disneyplus.com/lib/fe4415707564067f751773/m/1/706b9cc2-7189-4c85-8ace-debe1bcd9221.jpg" alt="Captain Marvel" style="display: block;width: 100%;max-width: 128px;" width="128" border="0" />
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- 2 Images END -->
+                
+                <!-- Section Text: BEGIN -->
+                <tr>
+                    <td bgcolor="#F0F3F9" align="center" width="450px" style="padding-bottom: 30px">
+                        <table cellpadding="0" cellpadding="0" border="0">
+                            <tr>
+                                <td width="400" align="center" style="color: #0A173F;font-family: 'Arial';text-align: center;width: 100%;max-width: 400px">
+                                    <h2 style="font-family: 'Arial';margin: 0;">All the best stories</h2>
+                                    <p style="color:#9394A3;font-family: 'Arial';margin: 0;padding-top: 15px;line-height: 22px;">Never before seen originals. New releases.<br/> Nostolgic classics. Now in one place.</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- Section Text: END -->
+                
+                <!-- Horizontal Line Rule: START -->
+                <tr>
+                    <td bgcolor="#F0F3F9" style="padding: 0 30px;background: #F0F3F9">
+                        <hr style="height: 1px;border: none;background-color: #9394A3;" />
+                    </td>
+                </tr>
+                <!-- Horizontal Line Rule: END -->
+
+                <!-- Unlimited downloads: BEGIN -->
+                <tr>
+                    <td align="center" bgcolor="#F0F3F9" style="padding: 40px 0">
+                        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                           <tr>
+                               <td align="center" style="padding-bottom: 40px;">
+                                   <table>
+                                       <tr>
+                                           <td align="center" style="padding: 0;">
+                                                <img src="https://image.mail.disneyplus.com/lib/fe4415707564067f751773/m/1/a59f2d69-87a4-4a60-ad94-38ed39d1c73e.png" alt="mobile app image" style="display: block;" width="230" border="0" />
+                                            </td>
+                                            <td style="padding: 0;">
+                                                <img src="https://image.mail.disneyplus.com/lib/fe4415707564067f751773/m/1/50b6aed0-e0d0-42ec-b6d9-0b67b86ca899.gif" alt="Spacer gif" style="display: block;" width="75" height="75" />
+                                            </td>
+                                            <td align="center" style="padding: 0;">
+                                                <img src="https://image.mail.disneyplus.com/lib/fe4415707564067f751773/m/1/26762c41-8d97-4c2c-b4c8-cf8aeca9af9e.gif" alt="mobile app image" style="display: block;" width="110" border="0" />
+                                            </td>
+                                       </tr>
+                                   </table>
+                               </td>
+                           </tr>
+                           <tr>
+                               <td align="center" style="padding: 0;">
+                                   <table cellpadding="0" cellspacing="0" border="0">
+                                       <tr>
+                                            <td width="400" align="center" style="color: #0A173F;font-family: 'Arial';text-align: center;width: 100%;max-width: 400px">
+                                                <h2 style="font-family: Arial;margin: 0;">Unlimited downloads</h2>
+                                                <p style="color:#9394A3;font-family: 'Arial';margin: 0;padding-top: 15px;line-height: 22px;">Take any of your favorites with you on<br/> up to 10 devices.</p>
+                                            </td>
+                                        </tr>
+                                   </table>
+                               </td>
+                           </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- Unlimited downloads: END -->
+                
+                <!-- Horizontal Line Rule: START -->
+                <tr>
+                    <td bgcolor="#F0F3F9" style="padding: 0 30px;background: #F0F3F9">
+                        <hr style="height: 1px;border: none;background-color: #9394A3;" />
+                    </td>
+                </tr>
+                <!-- Horizontal Line Rule: END -->
+
+                <!-- Premium for everyone : BEGIN -->
+                <tr>
+                    <td align="center" bgcolor="F0F3F9" style="padding: 40px 0;">
+                        <table cellpadding="0" cellspacing="0" role="presentation" border="0" width="100%">
+                            <tr>
+                                <td align="center" style="padding-bottom: 40px;">
+                                    <img src="https://image.mail.disneyplus.com/lib/fe4415707564067f751773/m/1/aae2b0a6-e7a1-4c21-86c2-958f182c5786.png" alt="Free solo" style="display: block;width: 100%;max-width: 600px;" width="600" border="0" />
+                                </td>
+                            </tr>
+                           <tr>
+                               <td align="center" style="padding: 0;">
+                                   <table cellpadding="0" cellspacing="0" border="0">
+                                       <tr>
+                                            <td width="400" align="center" style="color: #0A173F;font-family: 'Arial';text-align: center;width: 100%;max-width: 400px">
+                                                <h2 style="font-family: 'Arial';margin: 0;">Premium for everyone</h2>
+                                                <p style="color:#9394A3;font-family: 'Arial';margin: 0;padding-top: 15px;line-height: 22px;">Stream on 4 devices at once, ad-free, with select<br/> in 4K Ultra HD. It's all included.</p>
+                                            </td>
+                                        </tr>
+                                   </table>
+                               </td>
+                           </tr>
+                           <tr>
+                               <td align="center" style="padding: 30px 0 0 0;text-align: center;">
+                                    <div>
+                                         <!--[if mso]>
+                                          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://www.disneyplus.com/" style="height:50px;v-text-anchor:middle;width:245px;" arcsize="20%" strokecolor="#026AF7" fillcolor="#026AF7">
+                                            <w:anchorlock/>
+                                            <center style="color:#ffffff;font-family:sans-serif;font-size:16px;font-weight:bold;">Stream now</center>
+                                          </v:roundrect>
+                                        <![endif]-->
+                                        <a href="https://www.disneyplus.com/" style="background-color:#026AF7;border:1px solid #026AF7;border-radius:8px;color:#ffffff;display:inline-block;font-family:sans-serif;font-size:16px;font-weight:bold;line-height:45px;text-align:center;text-decoration:none;width:245px;-webkit-text-size-adjust:none;mso-hide:all;">Stream now</a>
+                                   </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- Premium for everyone : END -->
+                
+                <!-- Horizontal Line Rule: START -->
+                <tr>
+                    <td bgcolor="#F0F3F9" style="padding: 0 30px;background: #F0F3F9">
+                        <hr style="height: 1px;border: none;background-color: #9394A3;" />
+                    </td>
+                </tr>
+                <!-- Horizontal Line Rule: END -->
+
+                <!-- Social Icons : BEGIN -->
+                <tr>
+                    <td align="center" bgcolor="#F0F3F9" style="padding: 40px 0;">
+                        <table cellpadding="0" cellspacing="0" border="0" role="presentation">
+                           <tr>
+                               <td width="400" align="center" style="color: #0A173F;font-family: 'Arial';text-align: center;width: 100%;max-width: 400px;padding-bottom: 20px;">
+                                   <h2 style="font-family: 'Arial';margin: 0;">Follow us</h2>
+                               </td>
+                           </tr>
+                            <tr>
+                               <td align="center">
+                                   <table>
+                                       <tr>
+                                           <td style="padding: 0;">
+                                                <img src="https://image.mail.disneyplus.com/lib/fe4415707564067f751773/m/1/33019aa4-8d12-46fe-985b-dc2b11847dc1.png" alt="Instagram logo" style="display: block;" width="50" border="0" />
+                                            </td>
+                                            <td style="padding: 0;">
+                                                <img src="https://image.mail.disneyplus.com/lib/fe4415707564067f751773/m/1/50b6aed0-e0d0-42ec-b6d9-0b67b86ca899.gif" alt="Spacer gif" style="display: block;width: 100%;max-width: 15px;height: 15px;" width="15" height="15" />
+                                            </td>
+                                            <td style="padding: 0;">
+                                                <img src="https://image.mail.disneyplus.com/lib/fe4415707564067f751773/m/1/0581ead2-35fa-4af5-916d-060b6bebc523.png" alt="Facebook logo" style="display: block;" width="50" border="0" />
+                                            </td>
+                                            <td style="padding: 0;">
+                                                <img src="https://image.mail.disneyplus.com/lib/fe4415707564067f751773/m/1/50b6aed0-e0d0-42ec-b6d9-0b67b86ca899.gif" alt="Spacer gif" style="display: block;width: 100%;max-width: 15px;height: 15px;" width="15" height="15" />
+                                            </td>
+                                            <td style="padding: 0;">
+                                                <img src="https://image.mail.disneyplus.com/lib/fe4415707564067f751773/m/1/0d03fd06-d549-43a6-9558-b0cf840d0af1.png" alt="Twitter logo" style="display: block;" width="50" border="0" />
+                                            </td>
+                                       </tr>
+                                   </table>
+                               </td>
+                            </tr>
+                           <tr>
+                                <td width="400" align="center" style="color: #9394A3;font-family: 'Arial';text-align: center;width: 100%;max-width: 400px">
+                                    <p style="color:#9394A3;font-family: 'Arial';margin: 0;padding-top: 15px;line-height: 22px;">For more information, please visit our <a href="https://www.example.com" style="color: #9394A3;text-decoration: underline;">Help Center</a></p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <!-- Email Body : END -->
+
+            <!-- Email Footer : BEGIN -->
+            <table bgcolor="#0A173F" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px;background: #0A173F;background-color: #0A173F;">
+               <tr>
+                   <td width="100%;" style="padding: 40px 80px 30px;">
+                       <img src="https://image.mail.disneyplus.com/lib/fe4415707564067f751773/m/1/ad332f70-9069-48ca-80db-e00cdcb45c48.png" alt="Studio logos" style="display: block;width: 100%;max-width: 600px;" width="600" border="0" />
+                   </td>
+               </tr>
+                <tr>
+                    <td style="padding: 0 80px 0 80px; font-family: Arial; font-size: 12px; line-height: 15px; color: #415071;">
+                        <p style="color: #415071;margin: 0;font-size: 12px;line-height: 16px;">
+                            This email was sent to: example@gmail.com. Please do not reply to this email as this address is not monitored. This email contains an advertisement from: Disney Streaming Services, LLC, 75 Ninth Avenue 6th Floor, New York, NY 10011.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 20px 80px 0 80px; font-family: Arial; font-size: 12px; line-height: 15px; color: #415071;">
+                        <p style="color: #415071;margin: 0;font-size: 12px;line-height: 16px;">
+                            If you do not want to receive future marketing email messages from Disney +, please <a href="https://www.example.com" style="color:#415071;text-decoration: underline;">opt-out</a>.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 20px 80px; font-family: Arial; font-size: 12px; line-height: 15px; color: #415071;">
+                        <p style="color: #415071;margin: 0;font-size: 12px;line-height: 16px;">
+                            &copy; 2021 Disney and its related entities. All rights reserved.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="30px"></td>
+                </tr>
+            </table>
+            <!-- Email Footer : END -->
+
+            <!--[if mso]>
+            </td>
+            </tr>
+            </table>
+            <![endif]-->
+        </div>
+    <!--[if mso | IE]>
+    </td>
+    </tr>
+    </table>
+    <![endif]-->
+    </center>
+</body>
+</html>
